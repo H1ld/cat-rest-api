@@ -4,6 +4,7 @@ import { User } from './entities/user.entity';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
+// Defines which files to use for User module
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
