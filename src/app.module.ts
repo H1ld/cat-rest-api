@@ -11,7 +11,7 @@ import { UsersModule } from './users/users.module';
     TypeOrmModule.forRoot({ // Configuration de la connexion à la base de données SQLite
       type: 'sqlite', // Type de base de données
       database: 'todoapp.db', // Nom du fichier de base de données
-      entities: [__dirname + '/**/*.entity.ts'], // Chemin vers les entités
+      entities: [__dirname + '/**/*.entity{.ts,.js}'], // Chemin vers les entités
       synchronize: true, // Synchronisation automatique des entités avec la base de données, utile en développement mais à éviter en production
     }),
     UsersModule,
