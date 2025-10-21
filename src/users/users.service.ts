@@ -33,7 +33,7 @@ export class UsersService {
   }
 
   const updated = Object.assign(toUpdate, updateUserDto);
-  return await this.userRepository.save(updated);
+    return await this.userRepository.save(updated);
   }
 
   async remove(id: number) { // Deletes user
