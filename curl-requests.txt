@@ -3,7 +3,7 @@ List of cURLs requests to test the program:
 Create user:
 curl -X POST http://localhost:3000/users \
   -H "Content-Type: application/json" \
-  -d '{"firstname": "Alice", "lastname": "Bob", "email": "AliceBob@example.com"}'
+  -d '{"username": "Alice", "password": "pwd"}'
 
 Read a user:
 curl http://localhost:3000/users/[id]
@@ -11,7 +11,7 @@ curl http://localhost:3000/users/[id]
 Update a user:
 curl -X PATCH http://localhost:3000/users/[id] \
   -H "Content-Type: application/json" \
-  -d '{"firstname": "Charlie", "lastname": "Dough", "email": "CharlieDough@example.com"}'
+  -d '{"username": "Bob", "password": "2ndPwd"}'
 
 
 Delete a user:
