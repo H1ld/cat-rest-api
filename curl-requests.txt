@@ -1,6 +1,10 @@
 List of cURLs requests to test the program:
 
-Create user:
+##############################
+########## User ##############
+##############################
+
+Create a user:
 curl -X POST http://localhost:3000/users \
   -H "Content-Type: application/json" \
   -d '{"username": "Alice", "password": "pwd"}'
@@ -17,3 +21,23 @@ curl -X PATCH http://localhost:3000/users/[id] \
 Delete a user:
 curl -X DELETE http://localhost:3000/users/[id]
 
+
+##############################
+########## Cat ###############
+##############################
+
+Create a cat:
+curl -X POST http://localhost:3000/cats \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Charlie", "color": "white"}'
+
+Read a cat:
+curl http://localhost:3000/cats/[id]
+
+Update a cat:
+curl -X PATCH http://localhost:3000/cats/1 \
+  -H "Content-Type: application/json" \
+  -d '{"color": "black"}'
+
+Delete a cat:
+curl -X DELETE http://localhost:3000/cats/1
