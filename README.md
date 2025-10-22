@@ -1,5 +1,8 @@
 ## About the project
-3rd school year project in the making based on [a guide](https://mariusniemet20.medium.com/building-your-first-rest-api-with-nestjs-and-typeorm-and-test-it-with-postman-fb34ae9fa328) with the help of [CamilleTouron's](https://github.com/CamilleTouron) [repo](https://github.com/CamilleTouron/todoapp)
+3rd school year project in the making.
+ * Basic CRUD API came from [this guide](https://mariusniemet20.medium.com/building-your-first-rest-api-with-nestjs-and-typeorm-and-test-it-with-postman-fb34ae9fa328)
+ * Database setup was made with the help of [CamilleTouron's](https://github.com/CamilleTouron) [repo](https://github.com/CamilleTouron/todoapp)
+ * Authentication was added using [nestJs official doc](https://docs.nestjs.com/security/authentication?source=post_page-----4a347ce154b6---------------------------------------)
 
 ## Built with 
 [![Nest][Nest.js]][Nest-url]
