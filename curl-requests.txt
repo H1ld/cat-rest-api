@@ -1,7 +1,7 @@
 List of cURLs requests to test the program:
 
 ##############################
-########## User ##############
+############ User ############
 ##############################
 
 Create a user:
@@ -10,34 +10,50 @@ curl -X POST http://localhost:3000/users \
   -d '{"username": "Alice", "password": "pwd"}'
 
 Read a user:
-curl http://localhost:3000/users/[id]
+curl http://localhost:3000/users/[id] \
+  -H "Authorization: Bearer [ACCESS_TOKEN]"
 
 Update a user:
 curl -X PATCH http://localhost:3000/users/[id] \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [ACCESS_TOKEN]" \
   -d '{"username": "Bob", "password": "2ndPwd"}'
 
 
 Delete a user:
-curl -X DELETE http://localhost:3000/users/[id]
+curl -X DELETE http://localhost:3000/users/[id] \
+  -H "Authorization: Bearer [ACCESS_TOKEN]"
 
 
 ##############################
-########## Cat ###############
+############ Cat #############
 ##############################
 
 Create a cat:
 curl -X POST http://localhost:3000/cats \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [ACCESS_TOKEN]" \
   -d '{"name": "Charlie", "color": "white"}'
 
 Read a cat:
-curl http://localhost:3000/cats/[id]
+curl http://localhost:3000/cats/[id] \
+  -H "Authorization: Bearer [ACCESS_TOKEN]"
 
 Update a cat:
 curl -X PATCH http://localhost:3000/cats/1 \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [ACCESS_TOKEN]" \
   -d '{"color": "black"}'
 
 Delete a cat:
-curl -X DELETE http://localhost:3000/cats/1
+curl -X DELETE http://localhost:3000/cats/1 \
+  -H "Authorization: Bearer [ACCESS_TOKEN]"
+
+##############################
+############ Auth ############
+##############################
+
+Get user token
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": [username], "password": [userPassword]}'

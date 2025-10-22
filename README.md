@@ -25,7 +25,13 @@ git clone https://github.com/H1ld/cat-rest-api
 npm install
 ```
 
-3. Run the server.
+3. Create a copy of constants.ts.example and rename it to constants.ts.
+```
+cp constants.ts.example constants.ts
+```
+4. Edit the contents of constants.ts using [a jwt key generator](https://jwtsecrets.com/)
+
+5. Run the server.
 ```
 npm run start
 ```

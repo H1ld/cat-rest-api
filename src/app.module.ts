@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { CatsModule } from './cats/cats.module';
+import { AuthModule } from './auth/auth.module';
 
 // This file configures modules, controller and services
 @Module({
@@ -16,6 +17,7 @@ import { CatsModule } from './cats/cats.module';
     }),
     UsersModule,
     CatsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
