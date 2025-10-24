@@ -2,8 +2,14 @@
 3rd school year project in the making.
  * Basic CRUD API came from [a medium guide](https://mariusniemet20.medium.com/building-your-first-rest-api-with-nestjs-and-typeorm-and-test-it-with-postman-fb34ae9fa328)
  * Database setup was made with the help of [CamilleTouron's](https://github.com/CamilleTouron) [repo](https://github.com/CamilleTouron/todoapp)
- * Authentication was added using [nestJs official doc](https://docs.nestjs.com/security/authentication?source=post_page-----4a347ce154b6---------------------------------------)
+ * Authentication was added using [nestJs' official doc](https://docs.nestjs.com/security/authentication?source=post_page-----4a347ce154b6---------------------------------------)
  * Password encryption made using [ssojet's doc](https://ssojet.com/hashing/bcrypt-in-typescript/)
+ * .env creation using [nestJS' official doc](https://docs.nestjs.com/techniques/configuration)
+
+
+ <span style="color:red"> <b>
+ THIS VERSION IS NOT FULLY WORKING, THERE ARE ERRORS WHEN TRYING TO LOG IN, THIS COMMIT IS USED AS A CHECKPOINT TO GIT RESET, UPGRADE TO THE NEXT VERSION.
+</b></span>
 
 ## Built with 
 [![Nest][Nest.js]][Nest-url]
@@ -29,11 +35,11 @@ git clone https://github.com/H1ld/cat-rest-api
 npm install
 ```
 
-3. Create a copy of constants.ts.example and rename it to constants.ts.
+3. Create a copy of .env.example and rename it to env.ts
 ```
-cp constants.ts.example constants.ts
+cp .env.example .env
 ```
-4. Edit the contents of constants.ts using [a jwt key generator](https://jwtsecrets.com/)
+4. Edit the content of .env using
 
 5. Run the server.
 ```

@@ -5,7 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
-import { hash } from 'crypto';
+import { ConfigService } from '@nestjs/config';
 
 // User service file, 
 @Injectable()
@@ -13,11 +13,12 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private configService: ConfigService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
     // Hashes password for security
-    const saltRounds = 10;
+    const saltRounds = Number(this.configService.get('BCRYPT_SALT_ROUNDS')) || 10;
     const hashedPassword = await bcrypt.hash(createUserDto.password, saltRounds);
 
     // Replaces user's password with the hashed one before saving it
