@@ -7,7 +7,6 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 
-// User service file, 
 @Injectable()
 export class UsersService {
   constructor(
