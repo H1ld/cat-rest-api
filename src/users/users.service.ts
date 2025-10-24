@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
+import { hash } from 'crypto';
 
 // User service file, 
 @Injectable()
@@ -13,22 +15,34 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) { //Creates user according to its dto
-    return await this.userRepository.save(createUserDto);
+  async create(createUserDto: CreateUserDto) {
+    // Hashes password for security
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(createUserDto.password, saltRounds);
+
+    // Replaces user's password with the hashed one before saving it
+    const user = this.userRepository.create({
+      username: createUserDto.username,
+      password: hashedPassword,
+    });
+
+    // Saves user in database
+    return await this.userRepository.save(user);
   }
 
-  async findAll() { // Returns all users
+  async findAll() {
     return await this.userRepository.find();
   }
 
-  async findOne(id: number) { // Return user with given id
+  async findOne(id: number) {
     return await this.userRepository.findOne({ where: { id } });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) { // Updates User according to its dto
+  async update(id: number, updateUserDto: UpdateUserDto) {
   const toUpdate = await this.userRepository.findOne({ where: { id } });
 
-  if (!toUpdate) { // Makes sure update is on an existing user
+  // Checks if user exists
+  if (!toUpdate) {
     throw new Error(`User with ID ${id} not found`);
   }
 
@@ -36,7 +50,7 @@ export class UsersService {
     return await this.userRepository.save(updated);
   }
 
-  async remove(id: number) { // Deletes user
+  async remove(id: number) {
     return await this.userRepository.delete(id);
   }
 

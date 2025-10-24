@@ -16,7 +16,7 @@ import { Public } from './public.decorator';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Public() // this route can be accessed without JWT
+  @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
   signIn(@Body() signInDto: { username: string; password: string }) {
