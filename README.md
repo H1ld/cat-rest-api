@@ -41,6 +41,7 @@ git clone https://github.com/H1ld/cat-rest-api
 2. install npm Packages.
 ```
 npm install
+npm install --save @nestjs/config
 ```
 
 3. Create a copy of .env.example and rename it to .env.
