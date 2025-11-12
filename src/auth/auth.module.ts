@@ -16,7 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         const expiresIn = parseInt(configService.get<string>('JWT_EXPIRATION') || '3600', 10);
 
         return {
-          secret: configService.get<string>('JWT_SECRET'),
+          secret: configService.get<string>('JWT_CONSTANT'),
           signOptions: { expiresIn },
         };
       },

@@ -19,10 +19,6 @@ _Ascii Art generated with [Ascii Art Generator](http://patorjk.com/software/taag
  * .env creation using [nestJs' official doc](https://docs.nestjs.com/techniques/configuration)
 
 
-<span style="color:red"> <b>
-THIS VERSION IS NOT FULLY WORKING, THERE ARE ERRORS WHEN TRYING TO LOG IN, THIS COMMIT IS USED AS A CHECKPOINT TO GIT RESET, UPGRADE TO THE NEXT VERSION.
-</b> </span>
-
 ## Built with 
 [![Nest][Nest.js]][Nest-url]
 
@@ -47,12 +43,12 @@ git clone https://github.com/H1ld/cat-rest-api
 npm install
 ```
 
-3. Create a copy of .env.example and rename it to env.ts
+3. Create a copy of .env.example and rename it to .env.
 ```
 cp .env.example .env
 ```
 
-4. Edit the content of .env using
+4. Edit the content of .env using :
 
 5. Run the server.
 ```
