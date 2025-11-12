@@ -18,6 +18,7 @@ _Ascii Art generated with [Ascii Art Generator](http://patorjk.com/software/taag
  * Password encryption made using [ssoJet's doc](https://ssojet.com/hashing/bcrypt-in-typescript/)
  * .env creation using [nestJs' official doc](https://docs.nestjs.com/techniques/configuration)
  * User-cat association made with the help of [ChatGPT](https://chatgpt.com/share/6914f963-ae64-8006-a7ce-9d4f7ea57d72) and a [dev.to guide](https://dev.to/arctype/building-an-e-commerce-api-using-nestjs-sqlite-and-typeorm-17mp)
+ * Curl requests automation made using [curlconverter](https://curlconverter.com/python/)
 
 
 ## Built with 
@@ -60,7 +61,7 @@ npm run start
 ## Usage
 
 You can use the API with cURL requests using the templates in the `curl-templates.txt`
-Or test it out using `curl-example.txt`
+Or test it out using `curl-example.py` or step-by-step with `curl-example.txt` from an empty database.
 
 
 [Nest.js]: https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white

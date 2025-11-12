@@ -1,3 +1,4 @@
+# ---- Alice ----
 curl -X POST http://localhost:3000/users/signup \
   -H "Content-Type: application/json" \
   -d '{"username": "Alice", "password": "pwd"}'
@@ -11,7 +12,13 @@ curl -X POST http://localhost:3000/cats \
   -H "Authorization: Bearer [ALICE'S_TOKEN]" \
   -d '{"name": "Charlie", "color": "white"}'
 
+curl -X POST http://localhost:3000/cats \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [ALICE'S_TOKEN]" \
+  -d '{"name": "David", "color": "black&white"}'
 
+
+# ---- Bob ----
 curl -X POST http://localhost:3000/users/signup \
   -H "Content-Type: application/json" \
   -d '{"username": "Bob", "password": "pwd"}'
@@ -23,8 +30,51 @@ curl -X POST http://localhost:3000/auth/login \
 curl -X POST http://localhost:3000/cats \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer [BOB'S_TOKEN]" \
-  -d '{"name": "David", "color": "black"}'
+  -d '{"name": "Erin", "color": "black"}'
 
-Show all cats owned by user's token
+curl -X POST http://localhost:3000/cats \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [BOB'S_TOKEN]" \
+  -d '{"name": "Frank", "color": "ginger"}'
+
+
+# ---- Get all cats (example using Alice's token) ----
 curl http://localhost:3000/cats/ \
-  -H "Authorization: Bearer [USER_TOKEN]"
+  -H "Authorization: Bearer [ALICE'S_TOKEN]"
+
+
+# ---- Dummy User ----
+curl -X POST http://localhost:3000/users/signup \
+  -H "Content-Type: application/json" \
+  -d '{"username": "Dummy", "password": "pwd"}'
+
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "Dummy", "password": "pwd"}'
+
+# Update dummy user (replace 3 with actual ID)
+curl -X PATCH http://localhost:3000/users/3 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [DUMMY_TOKEN]" \
+  -d '{"username": "DummyUpdated", "password": "2ndpwd"}'
+
+# Delete dummy user
+curl -X DELETE http://localhost:3000/users/3 \
+  -H "Authorization: Bearer [DUMMY_TOKEN]"
+
+
+# ---- Dummy Cat ----
+curl -X POST http://localhost:3000/cats \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [ALICE'S_TOKEN]" \
+  -d '{"name": "Grace", "color": "cream"}'
+
+# Update dummy cat
+curl -X PATCH http://localhost:3000/cats/5 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [ALICE'S_TOKEN]" \
+  -d '{"color": "notAsCreamAsIThought"}'
+
+# Delete dummy cat
+curl -X DELETE http://localhost:3000/cats/5 \
+  -H "Authorization: Bearer [ALICE'S_TOKEN]"
