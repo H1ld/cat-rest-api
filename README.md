@@ -62,3 +62,8 @@ You can use the API with cURL requests using the templates in the curl-requests.
 
 [Nest.js]: https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white
 [Nest-url]: https://nestjs.com/
+
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
