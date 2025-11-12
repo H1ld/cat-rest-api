@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Cat } from '../../cats/entities/cat.entity';
 
-// Defines variables type
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -11,4 +11,8 @@ export class User {
 
   @Column('text')
   password: string;
+
+  // Allows user to have multiple cats.
+  @OneToMany(() => Cat, (cat) => cat.owner)
+  cats: Cat[];
 }

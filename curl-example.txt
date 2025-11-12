@@ -1,0 +1,30 @@
+curl -X POST http://localhost:3000/users/signup \
+  -H "Content-Type: application/json" \
+  -d '{"username": "Alice", "password": "pwd"}'
+
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "Alice", "password": "pwd"}'
+
+curl -X POST http://localhost:3000/cats \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [ALICE'S_TOKEN]" \
+  -d '{"name": "Charlie", "color": "white"}'
+
+
+curl -X POST http://localhost:3000/users/signup \
+  -H "Content-Type: application/json" \
+  -d '{"username": "Bob", "password": "pwd"}'
+
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "Bob", "password": "pwd"}'
+
+curl -X POST http://localhost:3000/cats \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [BOB'S_TOKEN]" \
+  -d '{"name": "David", "color": "black"}'
+
+Show all cats owned by user's token
+curl http://localhost:3000/cats/ \
+  -H "Authorization: Bearer [USER_TOKEN]"

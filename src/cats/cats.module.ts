@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm/dist';
-import { Cat } from './entities/cat.entity'
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Cat } from './entities/cat.entity';
 import { CatsService } from './cats.service';
 import { CatsController } from './cats.controller';
+import { UsersModule } from '../users/users.module';
 
-// Defines which files to use for Cat module
 @Module({
-  imports: [TypeOrmModule.forFeature([Cat])],
+  imports: [
+    TypeOrmModule.forFeature([Cat]),
+    UsersModule,
+  ],
   controllers: [CatsController],
   providers: [CatsService],
 })

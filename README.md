@@ -58,7 +58,8 @@ npm run start
 
 ## Usage
 
-You can use the API with cURL requests using the templates in the curl-requests.txt
+You can use the API with cURL requests using the templates in the `curl-templates.txt`
+Or test it out using `curl-example.txt`
 
 
 [Nest.js]: https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white

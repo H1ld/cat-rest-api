@@ -3,40 +3,57 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
-import { Cat } from './entities/cat.entity' 
+import { Cat } from './entities/cat.entity';
+import { User } from '../users/entities/user.entity';
 
-// Cat service file, contains operators 
 @Injectable()
-export class CatsService { 
-  constructor( 
-    @InjectRepository(Cat) 
-    private catRepository: Repository<Cat>, 
-  ) {} 
+export class CatsService {
+  constructor(
+    @InjectRepository(Cat)
+    private catRepository: Repository<Cat>,
 
-  async create(createCatDto: CreateCatDto) { //Creates Cat according to its dto 
-    return await this.catRepository.save(createCatDto); 
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
+
+  async create(createCatDto: CreateCatDto, ownerPayload: any) {
+    // Load the actual user entity from DB (it glitches out with the token, couldn't really figure out why)
+    const owner = await this.userRepository.findOne({
+      where: { id: ownerPayload.sub },
+    });
+    if (!owner) {
+      throw new Error('User not found');
+    }
+
+    // Create the cat entity and attach the user relation
+    const cat = this.catRepository.create({ ...createCatDto, owner });
+    return await this.catRepository.save(cat);
   }
 
-  async findAll() { // Returns all cats 
-    return await this.catRepository.find(); 
-  } 
-
-  async findOne(id: number) { // Return cat with given id 
-    return await this.catRepository.findOne({ where: { id } }); 
-  } 
-
-  async update(id: number, updateCatDto: UpdateCatDto) { // Updates cat according to its dto 
-  const toUpdate = await this.catRepository.findOne({ where: { id } });
-
-  if (!toUpdate) { // Makes sure update is on an existing user 
-    throw new Error(`Cat with ID ${id} not found`); 
+  async findAll(ownerPayload: any) {
+    return await this.catRepository.find({
+      where: { owner: { id: ownerPayload.sub } },
+      relations: ['owner'], // eager load owner
+    });
   }
 
-  const updated = Object.assign(toUpdate, updateCatDto); 
-    return await this.catRepository.save(updated); 
+  async findOne(id: number, ownerPayload: any) {
+    return await this.catRepository.findOne({
+      where: { id, owner: { id: ownerPayload.sub } },
+      relations: ['owner'],
+    });
   }
 
-  async remove(id: number) { // Deletes cat
-    return await this.catRepository.delete(id); 
-  } 
+  async update(id: number, updateCatDto: UpdateCatDto, ownerPayload: any) {
+    const cat = await this.findOne(id, ownerPayload);
+    if (!cat) throw new Error(`Cat not found or not yours`);
+    Object.assign(cat, updateCatDto);
+    return await this.catRepository.save(cat);
+  }
+
+  async remove(id: number, ownerPayload: any) {
+    const cat = await this.findOne(id, ownerPayload);
+    if (!cat) throw new Error(`Cat not found or not yours`);
+    return await this.catRepository.remove(cat);
+  }
 }
