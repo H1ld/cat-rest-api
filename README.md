@@ -48,11 +48,7 @@ npm install
 cp .env.example .env
 ```
 
-<<<<<<< HEAD
 4. Edit the content of .env using :
-=======
-4. Edit the content of .env using
->>>>>>> 8b2ed4f00ee2f873f188a0ed8159c9c49ff78c07
 
 5. Run the server.
 ```
