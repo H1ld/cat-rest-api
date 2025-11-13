@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -6,6 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
+
 
 @Injectable()
 export class UsersService {
@@ -16,6 +17,14 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
+  // Check if username already exists
+    const existingUser = await this.userRepository.findOne({
+      where: { username: createUserDto.username },
+    });
+    if (existingUser) {
+      throw new ConflictException('Username already exists');
+    }
+
     // Hashes password for security
     const saltRounds = Number(this.configService.get('BCRYPT_SALT_ROUNDS')) || 10;
     const hashedPassword = await bcrypt.hash(createUserDto.password, saltRounds);
