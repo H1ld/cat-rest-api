@@ -2,7 +2,7 @@ import requests
 
 try:
     # ---- Alice Signup & Login ----
-    alice_data = {'username': 'Alice', 'password': 'pwd'}
+    alice_data = {'username': 'Alice', 'password': 'Password123@'}
 
     # Signup
     print("Creating user Alice...")
@@ -23,7 +23,7 @@ try:
 
 
     # ---- Bob Signup & Login ----
-    bob_data = {'username': 'Bob', 'password': 'pwd'}
+    bob_data = {'username': 'Bob', 'password': 'Password123@'}
 
     # Signup
     print("Creating user Bob...")
@@ -51,18 +51,23 @@ try:
 
 
     # ---- Dummy User ----
+    dummy_user_data = {'username': 'Dummy', 'password': 'Password123@'}
+
+    # Signup
     print("Creating dummy user...")
-    dummy_user_data = {'username': 'Dummy', 'password': 'pwd'}
     requests.post('http://localhost:3000/users/signup', json=dummy_user_data)
 
+    # Login
     print("Logging in dummy user...")
     response = requests.post('http://localhost:3000/auth/login', json=dummy_user_data)
     dummy_token = response.json()['access_token']
-    headers = {'Authorization': f'Bearer {dummy_token}'}
 
-    # Update dummy user (replace '3' with actual user ID if needed)
+    
+
+    # Update dummy user
     print("Updating dummy user...")
-    user_update_data = {'username': 'DummyUpdated', 'password': '2ndpwd'}
+    headers = {'Authorization': f'Bearer {dummy_token}'}
+    user_update_data = {'username': 'DummyUpdated', 'password': 'Password456@'}
     requests.patch('http://localhost:3000/users/3', headers=headers, json=user_update_data)
 
     # Delete dummy user

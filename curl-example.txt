@@ -1,11 +1,11 @@
 # ---- Alice ----
 curl -X POST http://localhost:3000/users/signup \
   -H "Content-Type: application/json" \
-  -d '{"username": "Alice", "password": "pwd"}'
+  -d '{"username": "Alice", "password": "Password123@"}'
 
 curl -X POST http://localhost:3000/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username": "Alice", "password": "pwd"}'
+  -d '{"username": "Alice", "password": "Password123@"}'
 
 curl -X POST http://localhost:3000/cats \
   -H "Content-Type: application/json" \
@@ -21,11 +21,11 @@ curl -X POST http://localhost:3000/cats \
 # ---- Bob ----
 curl -X POST http://localhost:3000/users/signup \
   -H "Content-Type: application/json" \
-  -d '{"username": "Bob", "password": "pwd"}'
+  -d '{"username": "Bob", "password": "Password123@"}'
 
 curl -X POST http://localhost:3000/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username": "Bob", "password": "pwd"}'
+  -d '{"username": "Bob", "password": "Password123@"}'
 
 curl -X POST http://localhost:3000/cats \
   -H "Content-Type: application/json" \
@@ -46,17 +46,17 @@ curl http://localhost:3000/cats/ \
 # ---- Dummy User ----
 curl -X POST http://localhost:3000/users/signup \
   -H "Content-Type: application/json" \
-  -d '{"username": "Dummy", "password": "pwd"}'
+  -d '{"username": "Dummy", "password": "Password123@"}'
 
 curl -X POST http://localhost:3000/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username": "Dummy", "password": "pwd"}'
+  -d '{"username": "Dummy", "password": "Password123@"}'
 
 # Update dummy user (replace 3 with actual ID)
 curl -X PATCH http://localhost:3000/users/3 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer [DUMMY_TOKEN]" \
-  -d '{"username": "DummyUpdated", "password": "2ndpwd"}'
+  -d '{"username": "DummyUpdated", "password": "Password456@"}'
 
 # Delete dummy user
 curl -X DELETE http://localhost:3000/users/3 \
