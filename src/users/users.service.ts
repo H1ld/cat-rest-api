@@ -60,7 +60,7 @@ export class UsersService {
   async findByUsername(username: string): Promise<User | null> {
   return await this.userRepository.findOne({
     where: { username },
-    select: ['id', 'username', 'password'], // 👈 include password only when needed
+    select: ['id', 'username', 'password'], // password is hidden by default, it is explicitly given for login.
   });
 }
 }
