@@ -43,7 +43,7 @@ git clone https://github.com/H1ld/cat-rest-api
 2. install npm Packages.
 ```
 npm install
-npm install --save @nestjs/config
+npm install --save @nestjs/config @nestjs/swagger
 ```
 
 3. Create a copy of .env.example and rename it to .env.
@@ -62,6 +62,8 @@ npm run start
 
 You can use the API with cURL requests using the templates in the `curl-templates.txt`
 Or test it out using `curl-example.py` or step-by-step with `curl-example.txt` from an empty database.
+
+You can also access the swagger at localhost:3000/api
 
 
 [Nest.js]: https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white
