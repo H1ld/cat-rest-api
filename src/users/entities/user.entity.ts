@@ -9,7 +9,7 @@ export class User {
   @Column('text')
   username: string;
 
-  @Column('text')
+  @Column('text', { select: false }) // Hide password
   password: string;
 
   // Allows user to have multiple cats.

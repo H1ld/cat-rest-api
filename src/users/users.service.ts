@@ -26,8 +26,11 @@ export class UsersService {
       password: hashedPassword,
     });
 
-    // Saves user in database
-    return await this.userRepository.save(user);
+    const savedUser = await this.userRepository.save(user);
+
+    // Remove password before returning
+    const { password, ...result } = savedUser;
+    return result;
   }
 
   async findAll() {
@@ -55,6 +58,9 @@ export class UsersService {
   }
 
   async findByUsername(username: string): Promise<User | null> {
-    return await this.userRepository.findOne({ where: { username } });
-  }
+  return await this.userRepository.findOne({
+    where: { username },
+    select: ['id', 'username', 'password'], // 👈 include password only when needed
+  });
+}
 }
