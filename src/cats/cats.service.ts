@@ -5,6 +5,7 @@ import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
 import { Cat } from './entities/cat.entity';
 import { User } from '../users/entities/user.entity';
+import fetch from 'node-fetch';
 
 @Injectable()
 export class CatsService {
@@ -25,8 +26,22 @@ export class CatsService {
       throw new Error('User not found');
     }
 
-    // Create the cat entity and attach the user relation
-    const cat = this.catRepository.create({ ...createCatDto, owner });
+    let imageUrl: string | null = null;
+    try {
+      const response = await fetch('https://api.thecatapi.com/v1/images/search');
+      const data = (await response.json()) as Array<{ url: string }>;
+      imageUrl = data[0]?.url || null;
+    } catch (error) {
+      console.error('Error fetching cat image:', error);
+    }
+
+    
+    const cat = this.catRepository.create({
+      ...createCatDto,
+      owner,
+      imageUrl,
+    });
+
     return await this.catRepository.save(cat);
   }
 

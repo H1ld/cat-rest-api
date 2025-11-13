@@ -12,6 +12,9 @@ export class Cat {
   @Column('text')
   color: string;
 
+  @Column('text', { nullable: true })
+  imageUrl: string | null;
+
   // Allows multiple cats to be owned by a single user.
   @ManyToOne(() => User, (user) => user.cats, { onDelete: 'CASCADE' })
   owner: User;
