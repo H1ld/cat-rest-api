@@ -21,6 +21,7 @@ _Ascii Art generated with [Ascii Art Generator](http://patorjk.com/software/taag
  * Curl requests automation made using [curlconverter](https://curlconverter.com/python/)
  * Swagger setup with [nestJs' official doc](https://docs.nestjs.com/openapi/introduction)
  * Cats image gathered from [the Cat API](https://api.thecatapi.com/v1/images/search)
+ * Image caching implemented by following [nestJs' official doc](https://docs.nestjs.com/techniques/caching)
 
 
 ## Built with 

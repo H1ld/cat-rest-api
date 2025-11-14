@@ -52,7 +52,7 @@ curl -X POST http://localhost:3000/auth/login \
   -H "Content-Type: application/json" \
   -d '{"username": "Dummy", "password": "Password123@"}'
 
-# Update dummy user (replace 3 with actual ID)
+# Update dummy user
 curl -X PATCH http://localhost:3000/users/3 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer [DUMMY_TOKEN]" \

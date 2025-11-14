@@ -81,7 +81,7 @@ try:
     headers = {'Authorization': f'Bearer {alice_token}'}
     dummy_cat_data = {'name': 'Grace', 'color': 'cream'}
     response = requests.post('http://localhost:3000/cats', headers=headers, json=dummy_cat_data)
-    dummy_cat_id = response.json()['id']  # assuming the response returns an ID
+    dummy_cat_id = response.json()['id']
 
     # Update dummy cat
     print("Updating dummy cat...")
