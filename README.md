@@ -54,7 +54,7 @@ npm install --save @nestjs/config @nestjs/swagger
 cp .env.example .env
 ```
 
-4. Edit the content of .env using :
+4. Edit the content of .env.
 
 5. Run the server.
 ```
