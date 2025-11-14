@@ -17,31 +17,39 @@ export class CatsService {
     private userRepository: Repository<User>,
   ) {}
 
-  async create(createCatDto: CreateCatDto, ownerPayload: any) {
-    // Load the actual user entity from DB (it glitches out with the token, couldn't really figure out why)
-    const owner = await this.userRepository.findOne({
-      where: { id: ownerPayload.sub },
-    });
-    if (!owner) {
-      throw new Error('User not found');
+  private cachedCatImage: string | null = null;
+  private cacheTimestamp: number | null = null;
+  private readonly CACHE_TTL = 1000 * 60 * 5; // 5 minutes
+
+  async getRandomCatImage(): Promise<string | null> {
+    const now = Date.now();
+
+    if (this.cachedCatImage && this.cacheTimestamp && now - this.cacheTimestamp < this.CACHE_TTL) {
+      return this.cachedCatImage;
     }
 
-    let imageUrl: string | null = null;
     try {
       const response = await fetch('https://api.thecatapi.com/v1/images/search');
       const data = (await response.json()) as Array<{ url: string }>;
-      imageUrl = data[0]?.url || null;
+      const imageUrl = data[0]?.url || null;
+
+      this.cachedCatImage = imageUrl;
+      this.cacheTimestamp = now;
+
+      return imageUrl;
     } catch (error) {
       console.error('Error fetching cat image:', error);
+      return null;
     }
+  }
 
-    
-    const cat = this.catRepository.create({
-      ...createCatDto,
-      owner,
-      imageUrl,
-    });
+  async create(createCatDto: CreateCatDto, ownerPayload: any) {
+    const owner = await this.userRepository.findOne({ where: { id: ownerPayload.sub } });
+    if (!owner) throw new Error('User not found');
 
+    const imageUrl = await this.getRandomCatImage();
+
+    const cat = this.catRepository.create({ ...createCatDto, owner, imageUrl });
     return await this.catRepository.save(cat);
   }
 
