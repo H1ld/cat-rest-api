@@ -6,6 +6,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
+import { NotFoundException } from '@nestjs/common';
+
 
 
 @Injectable()
@@ -50,18 +52,37 @@ export class UsersService {
     return await this.userRepository.findOne({ where: { id } });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-  const toUpdate = await this.userRepository.findOne({ where: { id } });
 
-  // Checks if user exists
-  if (!toUpdate) {
-    throw new Error(`User with ID ${id} not found`);
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (updateUserDto.username && updateUserDto.username !== user.username) {
+    const existing = await this.userRepository.findOne({
+      where: { username: updateUserDto.username },
+    });
+
+    if (existing && existing.id !== id) {
+      throw new ConflictException('Username already exists');
+    }
   }
 
-  const updated = Object.assign(toUpdate, updateUserDto);
-    return await this.userRepository.save(updated);
+    // hashes password
+    if (updateUserDto.password) {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(updateUserDto.password, salt);
+      updateUserDto.password = hashedPassword;
+    }
+
+    Object.assign(user, updateUserDto);
+    const { password, ...result } = user;
+    return this.userRepository.save(result);
   }
 
+
+  
   async remove(id: number) {
     return await this.userRepository.delete(id);
   }
